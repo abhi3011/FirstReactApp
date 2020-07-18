@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {
-    count: this.props.value,
-    imageUrl: "https://picsum.photos/200",
-    tags: [],
-  };
-
   render() {
     console.log("props", this.props);
     return (
@@ -14,22 +8,23 @@ class Counter extends Component {
         <span className="badge badge-primary m-2">{this.getCount()}</span>
         <button
           className="btn btn-secondary btn-sm"
-          onClick={() => this.incriment("product")}
+          onClick={() => this.props.onIncriment(this.props.counter)}
         >
           Incriment
+        </button>
+        <button
+          className="btn btn-danger btn-sm m-2"
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+        >
+          Delete
         </button>
       </div>
     );
   }
 
   getCount() {
-    return this.state.count === 0 ? "Zero" : this.state.count;
+    return this.props.counter.value === 0 ? "Zero" : this.props.counter.value;
   }
-
-  incriment = (product) => {
-    console.log("clicked" + product);
-    this.setState({ count: this.state.count + 1 });
-  };
 }
 
 export default Counter;
